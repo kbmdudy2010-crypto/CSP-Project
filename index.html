@@ -1,0 +1,1348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>From Nile to Sea</title>
+<meta name="description" content="MYP Combined Science Project by Hayah International Academy students: investigating waste management in Damietta and Ras El Bar, Egypt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f8f5;
+  --surface: #ffffff;
+  --ink: #17231d;
+  --muted: #5a6b62;
+  --line: #dde5df;
+  --sea: #0e7c86;
+  --sea-soft: #e0f1f2;
+  --leaf: #3f8f4a;
+  --sand: #e9b44c;
+  --warn: #c8553d;
+  --radius: 14px;
+  --a: #0e7c86; --b: #3f8f4a; --c: #b7791f; --d: #b5473a;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1613; --surface: #17211c; --ink: #e8efe9; --muted: #9fb1a6;
+    --line: #2a3a31; --sea: #4cc3cc; --sea-soft: #12333a; --leaf: #6cc278;
+    --sand: #f0c46a; --warn: #ec8a73;
+    --a: #4cc3cc; --b: #6cc278; --c: #f0c46a; --d: #ec8a73;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1613; --surface: #17211c; --ink: #e8efe9; --muted: #9fb1a6;
+  --line: #2a3a31; --sea: #4cc3cc; --sea-soft: #12333a; --leaf: #6cc278;
+  --sand: #f0c46a; --warn: #ec8a73;
+  --a: #4cc3cc; --b: #6cc278; --c: #f0c46a; --d: #ec8a73;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body {
+  --k: var(--sea);
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.65 Inter, system-ui, sans-serif;
+}
+h1, h2, h3 { font-family: Fraunces, Georgia, serif; line-height: 1.15; margin: 0 0 .5em; }
+h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); }
+h3 { font-size: 1.2rem; }
+h4 { margin: 0 0 .4em; font-size: 1rem; }
+p { margin: 0 0 1em; }
+a { color: var(--sea); }
+code { font-size: .9em; }
+img { max-width: 100%; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+/* Nav (the wrapper is "display: contents" so the sticky nav sticks for the whole page) */
+#site-header { display: contents; }
+.site-nav {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+}
+.site-nav .wrap { display: flex; align-items: center; gap: 16px; height: 60px; }
+.brand { font-family: Fraunces, serif; font-weight: 800; color: var(--ink); text-decoration: none; white-space: nowrap; }
+.links { display: flex; gap: 2px; margin-left: auto; }
+.links a {
+  color: var(--muted); text-decoration: none; font-size: .88rem; font-weight: 500;
+  padding: 6px 9px; border-radius: 8px; white-space: nowrap;
+}
+.links a:hover, .links a[aria-current="page"] { background: var(--sea-soft); color: var(--sea); }
+.nav-toggle {
+  display: none; margin-left: auto; font: inherit; font-weight: 600; font-size: .9rem; cursor: pointer;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px;
+}
+@media (max-width: 960px) {
+  .nav-toggle { display: block; }
+  .links {
+    display: none; position: absolute; top: 60px; left: 0; right: 0; flex-direction: column;
+    background: var(--surface); border-bottom: 1px solid var(--line); padding: 8px 16px 16px;
+    box-shadow: 0 12px 24px rgba(0,0,0,.08);
+  }
+  .links.open { display: flex; }
+  .links a { padding: 10px 12px; font-size: 1rem; }
+}
+
+/* Landing hero */
+.landing-hero {
+  position: relative; color: #fff; min-height: min(88vh, 760px);
+  display: grid; align-items: end; padding: 120px 0 88px;
+  background: linear-gradient(180deg, rgba(8,20,18,.2) 0%, rgba(8,20,18,.55) 45%, rgba(8,20,18,.9) 100%), var(--img) center 40% / cover;
+}
+.landing-hero h1 { font-size: clamp(2.8rem, 9vw, 5.6rem); margin: .15em 0 .25em; }
+.landing-hero .eyebrow { color: #9fe3e8; }
+.landing-hero .lead { color: rgba(255,255,255,.88); font-size: 1.2rem; max-width: 640px; }
+.landing-hero .rq { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.22); border-left-color: #9fe3e8; backdrop-filter: blur(6px); }
+.landing-hero .rq strong { color: #9fe3e8; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+.btn {
+  display: inline-block; padding: 12px 22px; border-radius: 99px; font-weight: 600; text-decoration: none;
+  background: var(--sand); color: #17231d; transition: transform .15s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn.ghost { background: transparent; border: 1.5px solid rgba(255,255,255,.6); color: #fff; }
+
+.eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 600; color: var(--sea); }
+.rq {
+  margin-top: 24px; background: var(--surface); border: 1px solid var(--line);
+  border-left: 5px solid var(--sea); border-radius: var(--radius); padding: 18px 22px; max-width: 760px;
+}
+.rq strong { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: var(--sea); }
+.rq span { font-family: Fraunces, serif; font-size: 1.2rem; }
+
+/* Stats strip */
+.stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  margin-top: -44px; position: relative; z-index: 2; box-shadow: 0 16px 36px rgba(0,0,0,.08);
+}
+.stat { padding: 22px 12px; text-align: center; border-right: 1px solid var(--line); }
+.stat:last-child { border-right: 0; }
+.stat b { display: block; font-family: Fraunces, serif; font-size: 2.3rem; line-height: 1.1; color: var(--sea); }
+.stat span { font-size: .85rem; color: var(--muted); }
+@media (max-width: 620px) {
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat:nth-child(2) { border-right: 0; }
+  .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+}
+
+.inquiry { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.inquiry div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.inquiry b { display: block; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+
+/* Page cards on landing */
+.pages { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+.page-card {
+  display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); overflow: hidden; text-decoration: none; color: var(--ink);
+  transition: transform .2s, box-shadow .2s;
+}
+.page-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,.12); }
+.page-card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+.page-card .body { padding: 16px 18px 20px; border-top: 4px solid var(--k); flex: 1; }
+.page-card .tag { font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--k); }
+.page-card h3 { margin: .3em 0 .35em; }
+.page-card p { font-size: .9rem; color: var(--muted); margin: 0; }
+.page-card .go { display: inline-block; margin-top: 10px; font-size: .88rem; font-weight: 600; color: var(--sea); }
+
+/* Page hero (sub-pages) */
+.page-hero {
+  color: #fff; padding: 96px 0 48px;
+  background: linear-gradient(180deg, rgba(8,20,18,.3), rgba(8,20,18,.88)), var(--img) center 35% / cover;
+}
+.page-hero h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); margin: .35em 0 .3em; }
+.page-hero p { max-width: 680px; color: rgba(255,255,255,.88); font-size: 1.12rem; margin: 0; }
+
+section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+section:last-of-type { border-bottom: 0; }
+.section-intro { color: var(--muted); max-width: 700px; margin-bottom: 32px; }
+.crit {
+  display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .08em;
+  color: #fff; padding: 4px 12px; border-radius: 99px; margin-bottom: 10px; background: var(--k);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .crit { color: #0f1613; } }
+:root[data-theme="dark"] .crit { color: #0f1613; }
+
+/* Strand headings */
+.strand { margin-top: 52px; }
+.strand:first-child { margin-top: 0; }
+.strand-tag {
+  display: inline-block; font-family: Inter, sans-serif; font-size: .75rem; font-weight: 600; color: var(--k);
+  border: 1.5px solid currentColor; border-radius: 6px; padding: 1px 7px; margin-right: 8px; vertical-align: middle;
+}
+.strand > .hint { font-size: .9rem; color: var(--muted); margin-top: -.3em; }
+
+.grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+.card .icon { font-size: 1.8rem; margin-bottom: 8px; }
+.card p:last-child, .card ul:last-child, .card ol:last-child { margin-bottom: 0; }
+.card ul, .card ol { padding-left: 1.2em; }
+.mt { margin-top: 16px; }
+
+/* Citations */
+.cite { font-size: .75em; vertical-align: super; text-decoration: none; font-weight: 600; }
+
+/* Placeholder marker */
+.todo {
+  background: color-mix(in srgb, var(--sand) 25%, transparent);
+  border-bottom: 2px dashed var(--sand); padding: 0 3px;
+}
+
+/* Tables */
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+caption { text-align: left; padding: 14px 16px 6px; font-weight: 600; caption-side: top; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); background: var(--bg); }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Criteria map */
+.critmap { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.critmap .card { border-top: 5px solid var(--sea); }
+.critmap .card:nth-child(1) { border-top-color: var(--a); }
+.critmap .card:nth-child(2) { border-top-color: var(--b); }
+.critmap .card:nth-child(3) { border-top-color: var(--c); }
+.critmap .card:nth-child(4) { border-top-color: var(--d); }
+.critmap ul { list-style: none; padding: 0; margin: 0; font-size: .9rem; }
+.critmap li { display: flex; gap: 8px; align-items: flex-start; padding: 5px 0; }
+.critmap input { margin-top: 5px; accent-color: var(--sea); }
+.critmap a { color: var(--ink); text-decoration: none; }
+.critmap a:hover { color: var(--sea); text-decoration: underline; }
+.critmap li.done a { color: var(--muted); text-decoration: line-through; }
+.progress { height: 8px; background: var(--sea-soft); border-radius: 99px; overflow: hidden; margin: -12px 0 24px; max-width: 420px; }
+.progress div { height: 100%; background: var(--leaf); width: 0; transition: width .4s; }
+.progress-label { font-size: .85rem; color: var(--muted); margin-bottom: 18px; }
+
+/* Team */
+.team { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+.member { text-align: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 12px; }
+.avatar {
+  width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 10px;
+  display: grid; place-items: center; font-weight: 600; color: #fff; background: var(--sea);
+}
+.member .role { font-size: .85rem; color: var(--muted); }
+
+/* Places */
+.places { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.place { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.photo {
+  aspect-ratio: 16/9; display: grid; place-items: center; text-align: center; padding: 12px;
+  color: var(--muted); font-size: .9rem;
+  background: repeating-linear-gradient(45deg, var(--sea-soft), var(--sea-soft) 12px, var(--bg) 12px, var(--bg) 24px);
+}
+.photo.has-img { padding: 0; background: none; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.place .body { padding: 22px; }
+.place ul { padding-left: 1.2em; margin: 0; }
+
+/* Gallery */
+.gallery { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.gallery figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; cursor: zoom-in; transition: transform .3s; }
+.gallery figure:hover img { transform: scale(1.03); }
+.gallery figcaption { padding: 10px 14px; font-size: .88rem; color: var(--muted); position: relative; background: var(--surface); }
+.gallery-empty { color: var(--muted); border: 2px dashed var(--line); border-radius: var(--radius); padding: 28px; text-align: center; }
+.lightbox {
+  position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.9);
+  display: none; place-items: center; padding: 16px; cursor: zoom-out;
+}
+.lightbox.open { display: grid; }
+.lightbox img { max-width: 100%; max-height: 82vh; border-radius: 8px; }
+.lightbox p { color: #fff; text-align: center; margin-top: 12px; }
+
+/* Interviews */
+.videos { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.video-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.video-card video { width: 100%; max-height: 560px; background: #000; display: block; }
+.videos { align-items: start; }
+.video-card .body { padding: 16px 18px; }
+.video-card h3 { margin-bottom: .2em; }
+.video-card .who { font-size: .85rem; color: var(--sea); font-weight: 600; margin-bottom: .6em; }
+.video-card .takeaway { font-size: .92rem; color: var(--muted); margin: 0; }
+.video-card .quote {
+  margin: 0 0 .7em; padding-left: 12px; border-left: 3px solid var(--sea);
+  font-family: Fraunces, serif; font-size: 1.05rem; font-style: italic; line-height: 1.4;
+}
+
+/* Chart */
+.legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: .85rem; margin-bottom: 14px; }
+.legend span::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; background: var(--key); }
+.chart { display: grid; gap: 16px; }
+.group { display: grid; grid-template-columns: 140px 1fr; gap: 12px; align-items: center; font-size: .9rem; }
+.bars { display: grid; gap: 4px; }
+.bar-line { display: grid; grid-template-columns: 1fr 44px; gap: 8px; align-items: center; }
+.bar-track { background: var(--sea-soft); border-radius: 5px; height: 16px; overflow: hidden; }
+.bar { height: 100%; border-radius: 5px; width: 0; transition: width 1s ease; }
+.bar-line b { font-size: .82rem; font-variant-numeric: tabular-nums; }
+@media (max-width: 520px) { .group { grid-template-columns: 1fr; gap: 4px; } }
+.note { font-size: .82rem; color: var(--muted); margin-top: 14px; }
+
+/* Taking action */
+.actions { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+.action { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+.action img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.action .body { padding: 20px 22px; flex: 1; }
+.action .science { font-size: .9rem; background: var(--sea-soft); border-radius: 8px; padding: 10px 12px; margin-bottom: 1em; }
+.action .science b { color: var(--sea); }
+.action .impact { font-size: .9rem; margin: 0; }
+
+/* Quiz */
+.quiz { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; max-width: 640px; }
+.item { font-family: Fraunces, serif; font-size: 1.6rem; text-align: center; margin: 10px 0 18px; }
+.bins { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+.bins button {
+  font: inherit; font-weight: 600; padding: 12px; border-radius: 10px; cursor: pointer;
+  border: 2px solid var(--line); background: var(--bg); color: var(--ink);
+}
+.bins button:hover { border-color: var(--sea); }
+.feedback { min-height: 3.2em; margin-top: 14px; font-size: .95rem; }
+.score { font-size: .85rem; color: var(--muted); }
+
+dl.glossary { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 0; }
+dl.glossary div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+dl.glossary dt { font-weight: 600; }
+dl.glossary dd { margin: 0; font-size: .92rem; color: var(--muted); }
+
+ol.sources { padding-left: 1.4em; }
+ol.sources li { margin-bottom: .7em; padding-left: .3em; }
+
+/* Prev / next */
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 8px 0 64px; }
+.pager a {
+  display: block; padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); text-decoration: none; color: var(--ink); transition: border-color .2s;
+}
+.pager a:hover { border-color: var(--sea); }
+.pager small { display: block; color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; }
+.pager b { font-family: Fraunces, serif; font-size: 1.1rem; }
+.pager .next { grid-column: 2; text-align: right; }
+
+/* Footer */
+.site-footer { background: var(--surface); border-top: 1px solid var(--line); padding: 40px 0 48px; color: var(--muted); font-size: .9rem; }
+.footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
+.footer-grid p { margin: .4em 0 0; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 6px 16px; max-width: 520px; }
+.footer-links a { color: var(--muted); text-decoration: none; }
+.footer-links a:hover { color: var(--sea); }
+
+/* =================== Single-page layout =================== */
+.top-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--sand); z-index: 40; }
+
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: transparent; border-bottom-color: transparent; backdrop-filter: none;
+  transition: background .3s, border-color .3s;
+}
+.site-nav.solid {
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  border-bottom-color: var(--line); backdrop-filter: blur(10px);
+}
+.site-nav:not(.solid) .brand { color: #fff; }
+.site-nav:not(.solid) .nav-toggle { background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.3); }
+@media (min-width: 961px) {
+  .site-nav:not(.solid) .links a { color: rgba(255,255,255,.85); }
+  .site-nav:not(.solid) .links a:hover,
+  .site-nav:not(.solid) .links a[aria-current="true"] { background: rgba(255,255,255,.15); color: #fff; }
+}
+.links a[aria-current="true"] { background: var(--sea-soft); color: var(--sea); }
+
+.landing-hero { min-height: 100vh; min-height: 100svh; }
+.scroll-cue {
+  position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
+  color: rgba(255,255,255,.7); font-size: .8rem; letter-spacing: .15em; text-transform: uppercase;
+  text-decoration: none; animation: bob 2s ease-in-out infinite;
+}
+@keyframes bob { 50% { transform: translate(-50%, 6px); } }
+
+#chapters { padding: 72px 0 80px; }
+.page-card .thumb { position: relative; overflow: hidden; }
+.page-card .thumb img { transition: transform .4s; }
+.page-card:hover .thumb img { transform: scale(1.05); }
+.page-card .num {
+  position: absolute; left: 14px; bottom: 8px; font-family: Fraunces, serif; font-size: 2.2rem; font-weight: 800;
+  color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,.55);
+}
+
+section.chapter { padding: 0; border-bottom: 0; }
+.chapter-hero {
+  color: #fff; padding: 150px 0 60px;
+  background: linear-gradient(180deg, rgba(8,20,18,.3), rgba(8,20,18,.88)), var(--img) center 40% / cover;
+}
+.chapter-hero h2 { font-size: clamp(2.2rem, 6vw, 3.6rem); margin: .25em 0 .3em; }
+.chapter-hero p { max-width: 680px; color: rgba(255,255,255,.88); font-size: 1.12rem; margin: 0; }
+.chapter-num { font-family: Fraunces, serif; font-size: .95rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.75); margin-bottom: 10px; }
+.sub { padding: 56px 0; border-bottom: 1px solid var(--line); }
+.sub:last-of-type { border-bottom: 0; }
+.chapter-end { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-top: 8px; padding-bottom: 80px; }
+.chapter-end .to-hub { color: var(--muted); font-weight: 600; font-size: .9rem; text-decoration: none; }
+.chapter-end .to-hub:hover { color: var(--sea); }
+.chapter-end .next {
+  margin-left: auto; text-align: right; display: block; padding: 16px 22px; border: 1px solid var(--line);
+  border-radius: var(--radius); background: var(--surface); color: var(--ink); text-decoration: none; transition: border-color .2s, transform .2s;
+}
+.chapter-end .next:hover { border-color: var(--k); transform: translateX(4px); }
+.chapter-end small { display: block; color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; }
+.chapter-end b { font-family: Fraunces, serif; font-size: 1.1rem; }
+
+.to-top {
+  position: fixed; right: 18px; bottom: 18px; z-index: 30; width: 46px; height: 46px; border-radius: 50%;
+  display: grid; place-items: center; text-decoration: none; font-size: 1.2rem;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--line); box-shadow: 0 8px 20px rgba(0,0,0,.15);
+  opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.to-top.show { opacity: 1; pointer-events: auto; }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .scroll-cue { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-progress"></div>
+
+<nav class="site-nav"><div class="wrap">
+  <a class="brand" href="#top">🌊 From Nile to Sea</a>
+  <button class="nav-toggle" aria-expanded="false" aria-controls="navLinks">☰ Chapters</button>
+  <div class="links" id="navLinks"></div>
+</div></nav>
+
+<!-- ============ LANDING ============ -->
+<header class="landing-hero" id="top" style="--img:url('images/harbour-sunset.jpg')">
+  <div class="wrap">
+    <div class="eyebrow">MYP Combined Science Project · Grade 11 · Hayah International Academy (HIA)</div>
+    <h1>From Nile to Sea</h1>
+    <p class="lead">Nine students went to Damietta and Ras El Bar to see what happens to waste where the Nile meets the Mediterranean, and what science can do about it.</p>
+    <div class="rq">
+      <strong>Research question</strong>
+      <span>How does the amount and type of waste differ between urban Damietta and the beach at Ras El Bar, and what are the effects on the local environment?</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn" href="#chapters">Explore the chapters ↓</a>
+      <a class="btn ghost" href="#fieldwork">See the trip</a>
+    </div>
+  </div>
+  <a class="scroll-cue" href="#chapters">Scroll ↓</a>
+</header>
+
+<main>
+  <div class="wrap"><div class="stats" id="stats"></div></div>
+
+  <section id="chapters">
+    <div class="wrap">
+      <div class="eyebrow">Start here</div>
+      <h2>Choose a chapter</h2>
+      <p class="section-intro">The project is told in eight chapters, following the MYP Sciences criteria from A to D. Pick one to jump straight in, or scroll to read from the beginning.</p>
+      <div class="pages" id="chapterCards"></div>
+    </div>
+  </section>
+
+<!-- ============ OVERVIEW ============ -->
+<section class="chapter" id="overview">
+  <div class="sub" id="inquiry">
+    <div class="wrap">
+      <h2>Our unit of inquiry</h2>
+      <p class="section-intro">The big ideas that guide the whole project.</p>
+      <div class="inquiry">
+        <div><b>Global context</b>Globalization and sustainability</div>
+        <div><b>Key concept</b>Systems</div>
+        <div><b>Related concepts</b>Consequences · Environment · Interaction</div>
+      </div>
+      <div class="rq" style="border-left-color: var(--leaf); max-width: none;">
+        <strong style="color: var(--leaf)">Statement of inquiry</strong>
+        <span>Human systems that produce and manage waste interact with natural systems, and scientific understanding helps us reduce the consequences for the environment.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub" id="team">
+    <div class="wrap">
+      <h2>Our team</h2>
+      <p class="section-intro">The students behind this project.</p>
+      <div class="team" id="teamGrid"></div>
+    </div>
+  </div>
+
+  <div class="sub" id="criteria">
+    <div class="wrap">
+      <h2>Assessment criteria map</h2>
+      <p class="section-intro">Where each MYP Sciences strand is covered. Click a strand to jump to it, and tick it off when your group has finished that part (ticks are saved in this browser only).</p>
+      <div class="progress-label"></div>
+      <div class="progress"><div></div></div>
+      <div class="critmap" id="critmap">
+        <div class="card">
+          <h3>A · Knowing &amp; understanding</h3>
+          <ul>
+            <li><input type="checkbox"><a href="#a1">i. Explain scientific knowledge</a></li>
+            <li><input type="checkbox"><a href="#a2">ii. Apply knowledge to solve problems</a></li>
+            <li><input type="checkbox"><a href="#a3">iii. Analyse &amp; evaluate information to make judgements</a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>B · Inquiring &amp; designing</h3>
+          <ul>
+            <li><input type="checkbox"><a href="#b1">i. Explain the problem or question</a></li>
+            <li><input type="checkbox"><a href="#b2">ii. Testable hypothesis with reasoning</a></li>
+            <li><input type="checkbox"><a href="#b3">iii. Variables &amp; data collection</a></li>
+            <li><input type="checkbox"><a href="#b4">iv. Design the investigation</a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>C · Processing &amp; evaluating</h3>
+          <ul>
+            <li><input type="checkbox"><a href="#c1">i. Present collected &amp; transformed data</a></li>
+            <li><input type="checkbox"><a href="#c2">ii. Interpret data &amp; explain results</a></li>
+            <li><input type="checkbox"><a href="#c3">iii. Evaluate the hypothesis</a></li>
+            <li><input type="checkbox"><a href="#c4">iv. Evaluate the method</a></li>
+            <li><input type="checkbox"><a href="#c5">v. Improvements &amp; extensions</a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>D · Reflecting on impacts</h3>
+          <ul>
+            <li><input type="checkbox"><a href="#d1">i. How science addresses the problem</a></li>
+            <li><input type="checkbox"><a href="#d2">ii. Implications (social, economic, ethical…)</a></li>
+            <li><input type="checkbox"><a href="#d3">iii. Scientific language</a></li>
+            <li><input type="checkbox"><a href="#d4">iv. Sources documented</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCIENCE ============ -->
+<section class="chapter" id="science">
+  <div class="sub">
+    <div class="wrap">
+      <p class="section-intro">Damietta is a busy city known for furniture-making, fishing and its port. Ras El Bar is a summer beach town where the Nile's Damietta branch meets the Mediterranean. Both produce a lot of waste right next to water.</p>
+
+      <div class="strand" id="a1">
+        <h3><span class="strand-tag">A.i</span>Scientific background</h3>
+        <p class="hint">The science we need to understand the problem. Numbers in brackets link to our references.</p>
+        <div class="grid">
+          <div class="card"><div class="icon">⚗️</div><h4>Chemistry: polymers &amp; combustion</h4>
+            <p>Plastics are long-chain polymers made from crude oil. Their strong carbon–carbon bonds are not broken down by most microorganisms, so they persist for decades or centuries, breaking only into smaller pieces (microplastics, under 5 mm) <a class="cite" href="#ref1">[1]</a><a class="cite" href="#ref3">[3]</a>.</p>
+            <p>Burning waste in the open is <b>incomplete combustion</b>: it releases CO₂, toxic carbon monoxide and soot. Burning PVC can also release hydrogen chloride and dioxins.</p></div>
+          <div class="card"><div class="icon">🧬</div><h4>Biology: eutrophication &amp; food chains</h4>
+            <p>Organic waste and sewage add nutrients (nitrates, phosphates) to water. Algae grow quickly, then die, and aerobic bacteria decomposing them use up dissolved oxygen. This raises the <b>biochemical oxygen demand (BOD)</b> and fish can suffocate <a class="cite" href="#ref2">[2]</a>.</p>
+            <p>Microplastics are eaten by plankton, fish and shellfish, so they can <b>bioaccumulate</b> up the food chain to the fish sold in Damietta's markets <a class="cite" href="#ref1">[1]</a>.</p></div>
+          <div class="card"><div class="icon">⚡</div><h4>Physics: density &amp; currents</h4>
+            <p>Whether waste floats depends on its <b>density</b> compared with water (fresh water ≈ 1.00 g/cm³, seawater ≈ 1.025 g/cm³). Floating waste is carried by river currents, wind and waves, so it collects where the river meets the sea and washes onto beaches.</p>
+            <p>Waste also stores chemical energy: sawdust and organic waste can be burned in controlled conditions or digested to make biogas.</p></div>
+          <div class="card"><div class="icon">🌡️</div><h4>Landfill &amp; climate</h4>
+            <p>In landfill, buried organic waste decomposes <b>anaerobically</b> (without oxygen) and produces methane (CH₄). Methane traps far more heat than CO₂ over the short term, so landfilled food waste adds to climate change <a class="cite" href="#ref4">[4]</a>.</p></div>
+        </div>
+      </div>
+
+      <div class="strand" id="a2">
+        <h3><span class="strand-tag">A.ii</span>Applying knowledge: which plastics end up on the beach?</h3>
+        <p class="hint">Using density to predict a real situation.</p>
+        <div class="table-wrap">
+          <table>
+            <caption>Typical densities of common plastics (approximate values) <a class="cite" href="#ref1">[1]</a></caption>
+            <thead><tr><th>Plastic (code)</th><th>Common items</th><th class="num">Density (g/cm³)</th><th>Prediction in seawater (1.025 g/cm³)</th></tr></thead>
+            <tbody>
+              <tr><td>PET (1)</td><td>Water and soda bottles</td><td class="num">≈ 1.38</td><td>Sinks (unless the bottle has air trapped inside with its cap on)</td></tr>
+              <tr><td>HDPE (2)</td><td>Detergent bottles, caps</td><td class="num">≈ 0.95</td><td>Floats</td></tr>
+              <tr><td>LDPE (4)</td><td>Plastic bags, wrappers</td><td class="num">≈ 0.92</td><td>Floats</td></tr>
+              <tr><td>PP (5)</td><td>Food tubs, bottle caps, ropes</td><td class="num">≈ 0.90</td><td>Floats</td></tr>
+              <tr><td>PS (6)</td><td>Foam cups and food boxes</td><td class="num">≈ 0.05 (foam)</td><td>Floats very easily, breaks into small pieces</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card mt">
+          <h4>Our prediction</h4>
+          <p>Because PE, PP and foam polystyrene are less dense than seawater, we predict they will be carried by currents and washed up at Ras El Bar more than denser materials such as glass or metal. Capped PET bottles also float because of the air inside.</p>
+          <p>We test this prediction in the <a href="#results">Results chapter</a>: if plastic bags and bottles make up a bigger share of the litter at Ras El Bar than in Damietta, the data supports it.</p>
+        </div>
+      </div>
+
+      <div class="strand" id="a3">
+        <h3><span class="strand-tag">A.iii</span>Making a judgement from information</h3>
+        <p class="hint">Analyse information from your sources and interviews to answer a question, then make a judgement backed by science.</p>
+        <div class="card">
+          <h4>Question: What should Damietta's furniture workshops do with sawdust and wood offcuts?</h4>
+          <div class="table-wrap" style="margin: 12px 0">
+            <table>
+              <thead><tr><th>Option</th><th>Scientific advantages</th><th>Scientific disadvantages</th></tr></thead>
+              <tbody>
+                <tr><td>Open burning</td><td>Quick and free; the waste disappears from the workshop</td><td>Incomplete combustion releases CO, soot and smoke that harm lungs; the energy is wasted</td></tr>
+                <tr><td>Landfill / dumping</td><td>No smoke; no equipment needed</td><td>Wood decomposes anaerobically to methane, a strong greenhouse gas; dumped sawdust can wash into drains and the Nile</td></tr>
+                <tr><td>Pressed into particle board</td><td>Turns waste into a new product, so fewer trees are cut down; carbon stays locked in the wood</td><td>Some glues release formaldehyde; needs a factory and transport</td></tr>
+                <tr><td>Fuel pellets / biomass energy</td><td>Replaces fossil fuels; burning in a proper boiler is far more complete than open burning</td><td>Still releases CO₂ when burned; needs a pellet press</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><b>Our judgement:</b> Pressing offcuts into particle board is the best option, with fuel pellets second for sawdust too fine to press. Both turn waste into something useful, and both avoid the two worst outcomes: toxic smoke from open burning and methane from landfill. Open burning should be avoided completely because of its effect on workers' and neighbours' health. This judgement is based on general scientific principles from our sources; we did not measure the emissions ourselves, so it would be stronger with local data on how much wood waste Damietta's workshops produce.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLANNING ============ -->
+<section class="chapter" id="planning">
+  <div class="sub">
+    <div class="wrap">
+      <div class="strand" id="b1">
+        <h3><span class="strand-tag">B.i</span>The problem</h3>
+        <div class="card">
+          <p>Waste that is not collected properly in Damietta and Ras El Bar can enter the Nile and the Mediterranean, harming fish, beaches, health and tourism. We do not know how the <b>type</b> and <b>amount</b> of waste differs between a working city and a tourist beach, so we can't tell which solutions would work best in each place.</p>
+          <p><b>Research question:</b> How does the amount and type of waste differ between urban Damietta and the beach at Ras El Bar, and what are the effects on the local environment?</p>
+          <p>It matters because Damietta's fishing, furniture-making and summer tourism all depend on clean water and clean beaches. The Nile and the Mediterranean are part of Egypt's future, and ours.</p>
+        </div>
+      </div>
+
+      <div class="strand" id="b2">
+        <h3><span class="strand-tag">B.ii</span>Hypothesis</h3>
+        <div class="card">
+          <p><b>If</b> we compare litter in equal-sized areas, <b>then</b> Ras El Bar beach will have a higher proportion of plastic waste than Damietta city, while Damietta will have more organic and wood waste, <b>because</b> beach visitors use single-use plastic packaging and plastics of low density are carried to the coast by currents (<a href="#a2">A.ii</a>), whereas the city's markets and furniture workshops produce organic and wood waste.</p>
+        </div>
+      </div>
+
+      <div class="strand" id="b3">
+        <h3><span class="strand-tag">B.iii</span>Variables &amp; data collection</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Type</th><th>Variable</th><th>How it is changed, measured or controlled</th></tr></thead>
+            <tbody>
+              <tr><td><b>Independent</b></td><td>Location</td><td>Two sites: Damietta city and Ras El Bar beach</td></tr>
+              <tr><td><b>Dependent</b></td><td>Number of waste items of each type</td><td>Every item in the quadrat is counted and sorted into 5 categories on a tally sheet</td></tr>
+              <tr><td>Controlled</td><td>Area sampled</td><td>Same quadrat size at each site (10 m × 10 m), measured with a tape and marked with string</td></tr>
+              <tr><td>Controlled</td><td>Number of samples</td><td>3 quadrats per site, chosen at random, so a mean can be calculated</td></tr>
+              <tr><td>Controlled</td><td>Time spent</td><td>20 minutes per quadrat</td></tr>
+              <tr><td>Controlled</td><td>Waste categories</td><td>Same 5 categories and definitions used by every group member</td></tr>
+              <tr><td>Uncontrolled</td><td>Time of last clean-up, weather, number of visitors</td><td>Recorded so we can discuss their effect in the evaluation</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="grid mt">
+          <div class="card"><h4>Quantitative data</h4><p>Litter counts per category in each quadrat (raw data on the <a href="#c1">Results</a> page).</p></div>
+          <div class="card"><h4>Qualitative data</h4><p>Interviews with local people, photos and field notes on bins, dumping sites and water conditions (see <a href="#fieldwork">Fieldwork</a>).</p></div>
+        </div>
+      </div>
+
+      <div class="strand" id="b4">
+        <h3><span class="strand-tag">B.iv</span>Design: method, safety &amp; ethics</h3>
+        <div class="grid">
+          <div class="card"><h4>Materials</h4><ul>
+            <li>Measuring tape (30 m) and string</li>
+            <li>Litter pickers, nets and gloves</li>
+            <li>Tally sheets and clipboards</li>
+            <li>Phone camera</li>
+            <li>Rubbish bags for removing waste afterwards</li>
+            <li>Interview question sheet</li>
+          </ul></div>
+          <div class="card"><h4>Method</h4><ol>
+            <li>At each site, choose 3 quadrat locations at random.</li>
+            <li>Mark a 10 m × 10 m square with tape and string.</li>
+            <li>Two students pick up each item; one records it in a category on the tally sheet.</li>
+            <li>Photograph the quadrat before and after.</li>
+            <li>Repeat for all 3 quadrats, then at the second site.</li>
+            <li>Interview local people with first-hand knowledge of the problem: the assistant mayor, a fisherman and a farmer.</li>
+            <li>Dispose of the collected waste in proper bins.</li>
+          </ol></div>
+        </div>
+        <div class="table-wrap mt">
+          <table>
+            <caption>Risk assessment</caption>
+            <thead><tr><th>Hazard</th><th>Risk</th><th>Precaution</th></tr></thead>
+            <tbody>
+              <tr><td>Sharp objects (glass, metal, needles)</td><td>Cuts, infection</td><td>Gloves and litter pickers; never touch needles or medical waste, report them to the teacher</td></tr>
+              <tr><td>Sun and heat at the beach</td><td>Sunburn, dehydration</td><td>Hats, sunscreen, water, shade breaks</td></tr>
+              <tr><td>Water and slippery rocks</td><td>Falls, drowning</td><td>Use long-handled nets from stable ground; stay in groups with a teacher</td></tr>
+              <tr><td>Traffic</td><td>Accidents</td><td>Stay on pavements, cross roads together</td></tr>
+              <tr><td>Rotting waste</td><td>Bacteria</td><td>Gloves, wash hands before eating</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card mt"><h4>Ethics</h4>
+          <p>We asked every interviewee for permission before recording and explained how the video would be used. We did not film anyone who said no, and we left each site cleaner than we found it.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FIELDWORK ============ -->
+<section class="chapter" id="fieldwork">
+  <div class="sub" id="sites">
+    <div class="wrap">
+      <h2>Our two study sites</h2>
+      <p class="section-intro">Our field trip in October 2026; the interviews were recorded on 16 October. Evidence collected at both sites.</p>
+      <div class="places">
+        <article class="place">
+          <div class="photo" data-src="images/damietta.jpg" data-alt="A student carving wood in Damietta">📷 Put a photo named <b>damietta.jpg</b> in the images folder</div>
+          <div class="body">
+            <h3>Site 1: Damietta city</h3>
+            <p>A working city: furniture workshops, fish markets and the port.</p>
+            <ul>
+              <li>Wood offcuts and sawdust from furniture workshops</li>
+              <li>Organic waste from markets and fishing</li>
+              <li>Old shopfronts with peeling paint and weathered wooden doors</li>
+              <li>Fishing boats crowded along the Nile, with old tyres reused as boat fenders</li>
+            </ul>
+          </div>
+        </article>
+        <article class="place">
+          <div class="photo" data-src="images/ras-el-bar.jpg" data-alt="Sunset over the sea at Ras El Bar beach">📷 Put a photo named <b>ras-el-bar.jpg</b> in the images folder</div>
+          <div class="body">
+            <h3>Site 2: Ras El Bar</h3>
+            <p>A resort where the Nile meets the Mediterranean, crowded in summer.</p>
+            <ul>
+              <li>Plastic bottles, bags and food packaging on the beach</li>
+              <li>Bins: how many, how full, how close together</li>
+              <li>Litter along the riverbank and at the river mouth</li>
+              <li>A wide sandy beach with rock breakwaters out at sea</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub" id="gallery">
+    <div class="wrap">
+      <h2>Trip gallery</h2>
+      <p class="section-intro">Click a photo to see it bigger.</p>
+      <div class="gallery" id="galleryGrid"></div>
+    </div>
+  </div>
+
+  <div class="sub" id="interviews">
+    <div class="wrap">
+      <h2>Interviews</h2>
+      <p class="section-intro">We asked local people how waste affects their work and daily life.</p>
+      <div class="videos" id="videos"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULTS ============ -->
+<section class="chapter" id="results">
+  <div class="sub">
+    <div class="wrap">
+      <div class="card" style="border-color: var(--sand); margin-bottom: 40px">⚠️ <b>The numbers below are examples only.</b> Replace them with your real tally counts in <code>fieldData</code> in the script near the bottom of this file. The tables, means, standard deviations, percentages and chart all update automatically.</div>
+
+      <div class="strand" id="c1">
+        <h3><span class="strand-tag">C.i</span>Collected &amp; processed data</h3>
+        <div class="table-wrap" id="rawTable"></div>
+        <div class="table-wrap mt" id="procTable"></div>
+        <div class="card mt">
+          <h4>Figure 1: Mean number of items per quadrat by waste type</h4>
+          <div class="legend" id="legend"></div>
+          <div class="chart" id="chart"></div>
+          <p class="note">Bars show the mean of 3 quadrats. Table 2 gives the standard deviation, a measure of how spread out the 3 counts were.</p>
+        </div>
+      </div>
+
+      <div class="strand" id="c2">
+        <h3><span class="strand-tag">C.ii</span>Interpreting the results</h3>
+        <div class="card">
+          <p id="trendText"></p>
+          <p>The science explains this pattern. Bottles and bags are low-density plastics that float, so river currents and waves carry them to the coast, where they pile up on the beach (<a href="#a2">A.ii</a>). Visitors at a beach resort also use a lot of single-use packaging. In the city, food and wood waste come straight from the markets, the fishing industry and the furniture workshops we saw. The fisherman we interviewed backed this up: he told us rubbish in the water "affects the fish", and that green growth comes up in the nets with the catch, a sign of the eutrophication explained in <a href="#a1">A.i</a> <a class="cite" href="#ref7">[7]</a>.</p>
+        </div>
+      </div>
+
+      <div class="strand" id="c3">
+        <h3><span class="strand-tag">C.iii</span>Was the hypothesis supported?</h3>
+        <div class="card">
+          <p id="hypothesisText"></p>
+        </div>
+      </div>
+
+      <div class="strand" id="c4">
+        <h3><span class="strand-tag">C.iv</span>Validity of the method</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Strength or weakness</th><th>Effect on the results</th></tr></thead>
+            <tbody>
+              <tr><td>✅ Same quadrat size and categories at both sites</td><td>Fair comparison between sites</td></tr>
+              <tr><td>✅ 3 quadrats per site</td><td>Allows a mean and standard deviation, reducing the effect of one unusual quadrat</td></tr>
+              <tr><td>⚠️ Only one day, one season</td><td>Results may not represent summer peak or winter; beach may have been cleaned recently</td></tr>
+              <tr><td>⚠️ Different people sorting items</td><td>Items like paper cups could be put in different categories</td></tr>
+              <tr><td>⚠️ Counting items, not mass</td><td>One plastic bag counts the same as a large wood offcut</td></tr>
+              <tr><td>⚠️ The two sites differ in many ways at once (city vs beach, locals vs tourists)</td><td>We can show the sites are different, but not which single factor causes the difference</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="strand" id="c5">
+        <h3><span class="strand-tag">C.v</span>Improvements &amp; extensions</h3>
+        <div class="grid">
+          <div class="card"><h4>Improvements</h4><ul>
+            <li>Visit in summer and winter, and at the same time of day</li>
+            <li>Use 5+ quadrats per site to make the mean more reliable</li>
+            <li>Weigh each category as well as counting items</li>
+            <li>Train everyone with a photo guide of categories before starting</li>
+          </ul></div>
+          <div class="card"><h4>Extensions</h4><ul>
+            <li>Sieve beach sand to count microplastics</li>
+            <li>Test water samples for dissolved oxygen or nitrates at the river mouth</li>
+            <li>Compare with a less visited beach</li>
+            <li>Survey more residents with a written questionnaire</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IMPACT ============ -->
+<section class="chapter" id="impact">
+  <div class="sub">
+    <div class="wrap">
+      <div class="strand" id="d1">
+        <h3><span class="strand-tag">D.i</span>How science can address the problem</h3>
+        <div class="grid">
+          <div class="card"><div class="icon">🪵</div><h4>Reuse furniture waste</h4><p>Sawdust and offcuts can be pressed with resin into particle board, or compressed into fuel pellets. Controlled combustion in a proper boiler is more complete than open burning, producing less CO and soot.</p></div>
+          <div class="card"><div class="icon">🔥</div><h4>Biogas from organic waste</h4><p>Anaerobic digesters let bacteria break down fish and market waste in a sealed tank. The methane is captured and used as fuel instead of escaping from landfill, and the leftover digestate can be used as fertiliser.</p></div>
+          <div class="card"><div class="icon">♻️</div><h4>Plastic sorting &amp; recycling</h4><p>Plastics can be separated by type, for example by density in a float–sink tank (<a href="#a2">A.ii</a>), then washed, shredded and melted into new products.</p></div>
+          <div class="card"><div class="icon">🌊</div><h4>River-mouth barriers</h4><p>Floating booms use the fact that most plastics float to trap waste at the river surface before it reaches the sea, where it can be collected.</p></div>
+        </div>
+      </div>
+
+      <div class="strand" id="d2">
+        <h3><span class="strand-tag">D.ii</span>Implications of our chosen solution</h3>
+        <p class="hint">We discuss <b>and evaluate</b> each factor for one solution.</p>
+        <div class="table-wrap">
+          <table>
+            <caption>Solution: a plastic bottle return scheme at Ras El Bar</caption>
+            <thead><tr><th>Factor</th><th>Positive</th><th>Negative</th></tr></thead>
+            <tbody>
+              <tr><td><b>Environmental</b></td><td>Fewer bottles on the beach and in the sea, so less plastic breaks into microplastics; bottles get recycled instead of made from new oil</td><td>Collecting and transporting bottles uses fuel; does nothing about bags and wrappers</td></tr>
+              <tr><td><b>Economic</b></td><td>A cleaner beach attracts more tourists; recycled PET can be sold</td><td>Machines, staff and refunds cost money; drink prices may rise slightly to pay for the deposit</td></tr>
+              <tr><td><b>Social</b></td><td>Anyone, including children and people on low incomes, can earn small refunds by collecting bottles</td><td>People who don't know about the scheme pay the deposit but never get it back</td></tr>
+              <tr><td><b>Ethical / moral</b></td><td>Makes the people who create the waste responsible for it, instead of the fishermen and marine life who suffer from it</td><td>Could push the job of collecting litter onto the poorest people</td></tr>
+              <tr><td><b>Political</b></td><td>Fits international efforts to cut single-use plastic; more than 60 countries already have bans or levies <a class="cite" href="#ref5">[5]</a></td><td>Needs a law and agreement from drinks companies and local government, which takes time</td></tr>
+              <tr><td><b>Cultural</b></td><td>Builds on habits that already exist in Egypt, like collecting and reselling scrap</td><td>Beach visitors are used to leaving rubbish for cleaners, so habits take time to change</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card mt"><h4>Evaluation</h4><p>On balance, the benefits outweigh the problems. Plastic bottles are one of the most common items on the beach, and a refund gives everyone a reason to pick them up. Tourists and drinks companies pay a little more, while the sea, the fishermen and the local tourism economy gain. To work in Ras El Bar, the scheme would need collection points right on the beach, signs in Arabic and English, and support from the governorate. It should also be combined with more bins and better collection in summer, because it does nothing for bags and wrappers. The farmer we interviewed told us the same thing from his own experience: rubbish thrown anywhere makes collection harder, and "the whole idea is awareness" <a class="cite" href="#ref8">[8]</a>, so the scheme must come with an awareness campaign.</p></div>
+      </div>
+
+      <div class="strand" id="d3">
+        <h3><span class="strand-tag">D.iii</span>Key scientific terms</h3>
+        <dl class="glossary">
+          <div><dt>Polymer</dt><dd>A large molecule made of many repeating units (monomers); all plastics are polymers.</dd></div>
+          <div><dt>Biodegradable</dt><dd>Able to be broken down by microorganisms into simpler substances.</dd></div>
+          <div><dt>Microplastics</dt><dd>Plastic pieces smaller than 5 mm.</dd></div>
+          <div><dt>Eutrophication</dt><dd>Excess nutrients in water cause algae to grow rapidly, then lower oxygen levels when they decompose.</dd></div>
+          <div><dt>Biochemical oxygen demand (BOD)</dt><dd>The amount of dissolved oxygen used by microorganisms breaking down organic matter in water.</dd></div>
+          <div><dt>Bioaccumulation</dt><dd>The build-up of a substance in an organism faster than it can be removed.</dd></div>
+          <div><dt>Anaerobic decomposition</dt><dd>Breakdown of organic matter without oxygen, producing methane.</dd></div>
+          <div><dt>Incomplete combustion</dt><dd>Burning with too little oxygen, producing carbon monoxide and soot.</dd></div>
+          <div><dt>Density</dt><dd>Mass per unit volume (g/cm³); decides whether an object floats or sinks.</dd></div>
+          <div><dt>Quadrat</dt><dd>A marked square area used to sample a site.</dd></div>
+          <div><dt>Mean &amp; standard deviation</dt><dd>The average of repeated results, and how spread out they are around it.</dd></div>
+        </dl>
+      </div>
+
+      <div class="strand" id="d4">
+        <h3><span class="strand-tag">D.iv</span>References</h3>
+        <p class="hint">Use APA 7 (or your school's style). Every fact in the Science and Impact chapters needs an in-text citation like [1] that matches a number here. Include your interviews as personal communications.</p>
+        <div class="card">
+          <ol class="sources">
+            <li id="ref1">Andrady, A. L. (2011). Microplastics in the marine environment. <i>Marine Pollution Bulletin, 62</i>(8), 1596–1605. <a href="https://doi.org/10.1016/j.marpolbul.2011.05.030">https://doi.org/10.1016/j.marpolbul.2011.05.030</a></li>
+            <li id="ref2">Chislock, M. F., Doster, E., Zitomer, R. A., &amp; Wilson, A. E. (2013). Eutrophication: Causes, consequences, and controls in aquatic ecosystems. <i>Nature Education Knowledge, 4</i>(4), 10. <a href="https://www.nature.com/scitable/knowledge/library/eutrophication-causes-consequences-and-controls-in-aquatic-102364466/">nature.com/scitable</a></li>
+            <li id="ref3">National Oceanic and Atmospheric Administration. (n.d.). <i>What are microplastics?</i> National Ocean Service. <a href="https://oceanservice.noaa.gov/facts/microplastics.html">https://oceanservice.noaa.gov/facts/microplastics.html</a></li>
+            <li id="ref4">Forster, P., Storelvmo, T., et al. (2021). The Earth's energy budget, climate feedbacks, and climate sensitivity. In <i>Climate Change 2021: The Physical Science Basis</i>. Contribution of Working Group I to the Sixth Assessment Report of the IPCC. Cambridge University Press. <a href="https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-7/">https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-7/</a></li>
+            <li id="ref5">United Nations Environment Programme. (2018). <i>Single-use plastics: A roadmap for sustainability</i>. <a href="https://www.unep.org/resources/report/single-use-plastics-roadmap-sustainability">https://www.unep.org/resources/report/single-use-plastics-roadmap-sustainability</a></li>
+            <li id="ref6">Assistant mayor (personal communication, October 2026).</li>
+            <li id="ref7">Fisherman, Damietta (personal communication, 16 October 2026).</li>
+            <li id="ref8">Farmer, Ras El Bar (personal communication, 16 October 2026).</li>
+            <li id="ref9">Anthropic. (2026). <i>Claude</i> [Large language model]. Used to help build this website and draft parts of the text, which our group reviewed. <a href="https://claude.ai">https://claude.ai</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACTION ============ -->
+<section class="chapter" id="action">
+  <div class="sub">
+    <div class="wrap">
+      <p class="section-intro">We didn't just study the problem. While we were there, our group cleaned up, repaired and planted to make a real difference in the community.</p>
+      <div class="actions">
+        <article class="action">
+          <img src="images/netting-litter.jpg" alt="Two students using nets to pull litter from the water's edge" loading="lazy">
+          <div class="body">
+            <h3>Clearing litter from the water</h3>
+            <p>We used long-handled nets to pull plastic and other litter out of the shallow water and from between the rocks along the shore.</p>
+            <p class="science"><b>The science:</b> most bags, wrappers and caps are less dense than water, so they float and collect along the edge (see <a href="#a2">A.ii</a>). Removing them stops them breaking into microplastics or being carried out to sea.</p>
+            <p class="impact"><b>Our impact:</b> we pulled snack wrappers, bags and other plastic out of the water and from between the rocks, removing litter that would otherwise break down into microplastics or wash out to sea.</p>
+          </div>
+        </article>
+        <article class="action">
+          <img src="images/painting-together.jpg" alt="Students repainting a weathered wall blue" loading="lazy">
+          <div class="body">
+            <h3>Repainting old shopfronts</h3>
+            <p>We repainted weathered walls beside traditional wooden doors to make the street cleaner and brighter.</p>
+            <p class="science"><b>The science:</b> paint protects concrete and plaster from moisture and salt air, which slows weathering. Leftover paint and dirty brush water contain pigments and solvents, so they must be disposed of properly and never poured into drains or the river.</p>
+            <p class="impact"><b>Our impact:</b> we repainted a row of weathered walls and pillars in bright blue, protecting them from damp and salty air and making the street look cared for.</p>
+          </div>
+        </article>
+        <article class="action">
+          <img src="images/planting-garden.jpg" alt="A student giving a thumbs up next to newly planted marigolds" loading="lazy">
+          <div class="body">
+            <h3>Planting a garden</h3>
+            <p>We planted marigolds in a new garden bed, with a QR label beside each plant.</p>
+            <p class="science"><b>The science:</b> plants absorb CO₂ through photosynthesis, their roots hold soil together, and flowers attract pollinators. Organic waste like food scraps can be composted into fertiliser for gardens like this one.</p>
+            <p class="impact"><b>Our impact:</b> we filled a whole garden bed with yellow and orange marigolds, each with its own QR label, turning a bare patch of soil into a green space.</p>
+          </div>
+        </article>
+      </div>
+      <div class="card" style="margin-top:22px">
+        <h4>Reflecting on our action</h4>
+        <p>Clearing litter from the water made the most direct difference to the environment, because every piece we removed can no longer harm fish or turn into microplastics. But it was a one-off: new litter will arrive with the next current. The garden is likely to last longest, because plants keep growing after we leave. This showed us what our statement of inquiry means: human systems and natural systems are connected, and lasting change needs systems like the solutions in <a href="#d1">D.i</a>, not just one clean-up day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REFLECTION ============ -->
+<section class="chapter" id="reflection">
+  <div class="sub" id="looking-back">
+    <div class="wrap">
+      <h2>Looking back</h2>
+      <div class="grid">
+        <div class="card"><h4>What we learned</h4><p>We were surprised by how much litter collects at the water's edge, and how closely waste is linked to the jobs people do: furniture-making creates sawdust, fishing depends on clean water, and tourism creates plastic. We now see waste as a system that connects people and nature, not just rubbish on the ground.</p></div>
+        <div class="card"><h4>ATL skills</h4><p><b>Collaboration:</b> we split into teams for collecting litter, painting, planting and filming. <b>Research:</b> we combined fieldwork with scientific sources to explain what we saw. <b>Communication:</b> we interviewed an assistant mayor, a fisherman and a farmer, and built this website to share our findings.</p></div>
+        <div class="card"><h4>Learner profile</h4><p><b>Inquirers:</b> we asked questions of local experts instead of only reading online. <b>Caring:</b> we cleaned the shore, repainted shopfronts and planted a garden for the community. <b>Communicators:</b> we presented our work in a way anyone can explore.</p></div>
+        <div class="card"><h4>Teamwork</h4><p>With nine people we could do several things at once, like collecting litter, painting, planting and interviewing. The hardest part was making sure everyone used the same method and categories, which is also a limitation we discuss in <a href="#c4">C.iv</a>. Next time we would agree on roles and a checklist before the trip.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub" id="quiz">
+    <div class="wrap">
+      <h2>Which bin does it go in?</h2>
+      <p class="section-intro">Test yourself. Sort each item into the right bin.</p>
+      <div class="quiz">
+        <div class="score" id="score">Score: 0 / 0</div>
+        <div class="item" id="item"></div>
+        <div class="bins">
+          <button data-bin="plastic">🟦 Plastic</button>
+          <button data-bin="organic">🟩 Organic</button>
+          <button data-bin="paper">🟨 Paper</button>
+          <button data-bin="hazardous">🟥 Hazardous</button>
+        </div>
+        <div class="feedback" id="feedback"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer"><div class="wrap footer-grid">
+  <div>
+    <a class="brand" href="#top">🌊 From Nile to Sea</a>
+    <p>MYP Combined Science Project<br>Hayah International Academy (HIA) · 2026</p>
+  </div>
+  <div class="footer-links" id="footerLinks"></div>
+</div></footer>
+
+<a class="to-top" href="#top" aria-label="Back to top">↑</a>
+
+<script>
+// =====================================================================
+//  EDIT YOUR CONTENT HERE — the whole site reads from these lists
+// =====================================================================
+
+const team = [
+  { name: "Ahmed Alsahar",        role: "Team member" },
+  { name: "Yassin Mohammed",      role: "Team member" },
+  { name: "Ibrahim Abdelhameed",  role: "Team member" },
+  { name: "Malek Gasser",         role: "Team member" },
+  { name: "Abdelrahman Mohammed", role: "Team member" },
+  { name: "Youssef Sherif",       role: "Team member" },
+  { name: "Abdullah Elfeky",      role: "Team member" },
+  { name: "Omar El Nikety",       role: "Team member" },
+  { name: "Ali Rashdan",          role: "Team member" },
+];
+
+// Example numbers — replace with your real tally counts.
+// Each site has one row per quadrat, with counts in the same order as `types`.
+const fieldData = {
+  types: ["Plastic bottles", "Plastic bags", "Food / organic", "Wood / sawdust", "Cans / metal"],
+  sites: [
+    { name: "Damietta city", quadrats: [[12, 9, 25, 18, 6], [8, 11, 30, 22, 4], [10, 7, 21, 15, 7]] },
+    { name: "Ras El Bar beach", quadrats: [[28, 19, 9, 1, 8], [35, 24, 6, 0, 10], [22, 17, 11, 2, 5]] },
+  ],
+};
+
+// Photos live in the "images" folder.
+const photos = [
+  { file: "group-boat.jpg",        caption: "On the boat across Damietta's harbour" },
+  { file: "netting-litter.jpg",    caption: "Netting litter out of the water at the river's edge" },
+  { file: "waterfront-talk.jpg",   caption: "Interviewing the assistant mayor on the waterfront" },
+  { file: "damietta.jpg",          caption: "Trying Damietta's traditional wood carving" },
+  { file: "wood-carving.jpg",      caption: "Carving at a woodwork table — where wood offcuts and sawdust come from" },
+  { file: "painting-wall.jpg",     caption: "Repainting a weathered wall next to old wooden doors" },
+  { file: "painting-together.jpg", caption: "Painting together to refresh old shopfronts" },
+  { file: "planting-garden.jpg",   caption: "Planting marigolds in a new garden bed" },
+  { file: "harbour-sunset.jpg",    caption: "Fishing from the harbour among the fishing boats" },
+  { file: "ras-el-bar.jpg",        caption: "Sunset on the beach at Ras El Bar" },
+];
+
+// Videos (.mp4 works best) live in the "videos" folder.
+const interviews = [
+  { file: "interview1.mp4", title: "The assistant mayor", who: "Assistant mayor",
+    quote: "When you know your country's history, you'll know that we are a country with a history and weight in the world.",
+    takeaway: "Speaking with us on the waterfront, the assistant mayor talked about Egypt's history and identity: why knowing it makes you proud, and why Egypt is called \"the mother of the world\". He did not talk about waste, but reminded us why protecting this place matters." },
+  { file: "interview2.mp4", title: "A local fisherman", who: "Fisherman",
+    quote: "It affects the fish.",
+    takeaway: "On his boat, the fisherman told us that rubbish in the water affects the catch: green growth comes up in the nets with the fish, and boats that fish in the Nile move away from places where rubbish collects. He also told us the fish of Ezbet El Borg is the best." },
+  { file: "interview3.mp4", title: "A local farmer", who: "Farmer",
+    quote: "The whole idea is awareness.",
+    takeaway: "At the plant nursery in Ras El Bar, the farmer told us that rubbish thrown in the wrong place wears out the workers and equipment, and harms the plants when it lands in gardens. The fix, he said, is simple: put it in the bin so the truck can collect it, and plant flowers or fruit in any empty space." },
+];
+
+// The chapters of the site, in reading order. Drives the menu, the chapter cards, banners and "next" links.
+const CHAPTERS = [
+  { id: "overview", nav: "Overview", k: "var(--sea)", label: "Overview",
+    title: "The project at a glance", img: "images/group-boat.jpg",
+    desc: "Our unit of inquiry, our team and the assessment criteria map." },
+  { id: "science", nav: "Science", k: "var(--a)", label: "Criterion A · Knowing & understanding",
+    title: "The science of waste", img: "images/wood-carving.jpg",
+    desc: "The biology, chemistry and physics behind waste in Damietta and Ras El Bar." },
+  { id: "planning", nav: "Planning", k: "var(--b)", label: "Criterion B · Inquiring & designing",
+    title: "Planning the investigation", img: "images/netting-litter.jpg",
+    desc: "Our research question, hypothesis, variables, method and risk assessment." },
+  { id: "fieldwork", nav: "Fieldwork", k: "var(--sea)", label: "Fieldwork",
+    title: "In the field", img: "images/waterfront-talk.jpg",
+    desc: "Our two study sites, trip photos and interviews with local people." },
+  { id: "results", nav: "Results", k: "var(--c)", label: "Criterion C · Processing & evaluating",
+    title: "Results & evaluation", img: "images/ras-el-bar.jpg",
+    desc: "Our litter data, what it shows, and how reliable our method was." },
+  { id: "impact", nav: "Impact", k: "var(--d)", label: "Criterion D · Reflecting on the impacts of science",
+    title: "Solutions & impacts", img: "images/damietta.jpg",
+    desc: "How science can help, and the wider implications of our chosen solution." },
+  { id: "action", nav: "Action", k: "var(--leaf)", label: "Taking action · links to Criterion D",
+    title: "Taking action", img: "images/painting-together.jpg",
+    desc: "Cleaning up, repainting and planting: what we did to make a difference." },
+  { id: "reflection", nav: "Reflection", k: "var(--sea)", label: "Reflection",
+    title: "Reflection & quiz", img: "images/planting-garden.jpg",
+    desc: "What we learned as a team, and a quick quiz to test yourself." },
+];
+
+// =====================================================================
+//  Layout: menu, chapter cards, chapter banners, scroll effects
+// =====================================================================
+
+const pad = n => String(n).padStart(2, "0");
+const nav = document.querySelector(".site-nav");
+const navLinks = document.getElementById("navLinks");
+navLinks.innerHTML = CHAPTERS.map(c => `<a href="#${c.id}">${c.nav}</a>`).join("");
+document.getElementById("footerLinks").innerHTML = CHAPTERS.map(c => `<a href="#${c.id}">${c.title}</a>`).join("");
+
+const toggle = document.querySelector(".nav-toggle");
+const setMenu = open => {
+  navLinks.classList.toggle("open", open);
+  toggle.setAttribute("aria-expanded", open);
+  updateNav();
+};
+toggle.addEventListener("click", () => setMenu(!navLinks.classList.contains("open")));
+navLinks.addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
+
+document.getElementById("chapterCards").innerHTML = CHAPTERS.map((c, i) => `
+  <a class="page-card" href="#${c.id}" style="--k:${c.k}">
+    <div class="thumb"><img src="${c.img}" alt="" loading="lazy"><span class="num">${pad(i + 1)}</span></div>
+    <div class="body">
+      <div class="tag">${c.label}</div>
+      <h3>${c.title}</h3>
+      <p>${c.desc}</p>
+      <span class="go">Go to chapter →</span>
+    </div>
+  </a>`).join("");
+
+CHAPTERS.forEach((c, i) => {
+  const sec = document.getElementById(c.id);
+  sec.style.setProperty("--k", c.k);
+  sec.insertAdjacentHTML("afterbegin", `
+    <header class="chapter-hero" style="--img:url('${c.img}')"><div class="wrap">
+      <div class="chapter-num">Chapter ${pad(i + 1)} of ${pad(CHAPTERS.length)}</div>
+      <div class="crit">${c.label}</div>
+      <h2>${c.title}</h2>
+      <p>${c.desc}</p>
+    </div></header>`);
+  const next = CHAPTERS[i + 1];
+  sec.insertAdjacentHTML("beforeend", `
+    <div class="wrap chapter-end">
+      <a class="to-hub" href="#chapters">↑ All chapters</a>
+      ${next
+        ? `<a class="next" href="#${next.id}"><small>Next · Chapter ${pad(i + 2)}</small><b>${next.title} →</b></a>`
+        : `<a class="next" href="#top"><small>The end</small><b>Back to the top ↑</b></a>`}
+    </div>`);
+});
+
+// Jump links scroll with JS, so they also work in previews that block "#" navigation
+const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const id = a.getAttribute("href").slice(1);
+  const target = id && document.getElementById(id);
+  if (!target) return;
+  e.preventDefault();
+  if (id === "top") scrollTo({ top: 0, behavior: smooth ? "smooth" : "auto" });
+  else target.scrollIntoView({ behavior: smooth ? "smooth" : "auto" });
+  try { history.replaceState(null, "", "#" + id); } catch (err) {}
+});
+
+// Transparent nav over the photos, solid once scrolling; reading progress bar; back-to-top button
+const progress = document.querySelector(".top-progress");
+const toTop = document.querySelector(".to-top");
+function updateNav() {
+  nav.classList.toggle("solid", scrollY > 40 || navLinks.classList.contains("open"));
+}
+function onScroll() {
+  updateNav();
+  const max = document.documentElement.scrollHeight - innerHeight;
+  progress.style.width = (max > 0 ? 100 * scrollY / max : 0) + "%";
+  toTop.classList.toggle("show", scrollY > innerHeight);
+}
+addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+// Highlight the chapter you are reading in the menu
+const spy = new IntersectionObserver(entries => entries.forEach(e => {
+  if (!e.isIntersecting) return;
+  navLinks.querySelectorAll("a").forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + e.target.id));
+}), { rootMargin: "-45% 0px -50% 0px" });
+CHAPTERS.forEach(c => spy.observe(document.getElementById(c.id)));
+
+// Fade content in as it scrolls into view
+const reveal = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add("in"); reveal.unobserve(e.target); }
+}), { rootMargin: "0px 0px -8% 0px" });
+document.querySelectorAll(".card, .page-card, .place, .action, .table-wrap, .member, .quiz, dl.glossary div").forEach(el => {
+  el.classList.add("reveal");
+  reveal.observe(el);
+});
+
+// =====================================================================
+//  Overview: stats, team, criteria checklist
+// =====================================================================
+
+document.getElementById("stats").innerHTML =
+  [[team.length, "students"], [fieldData.sites.length, "study sites"], [photos.length, "trip photos"], [3, "community actions"]]
+    .map(([n, l]) => `<div class="stat"><b>${n}</b><span>${l}</span></div>`).join("");
+
+const colors = ["#0e7c86", "#3f8f4a", "#e9b44c", "#c8553d", "#6b7c72"];
+document.getElementById("teamGrid").innerHTML = team.map((m, i) => {
+  const initials = m.name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase();
+  return `<div class="member"><div class="avatar" style="background:${colors[i % colors.length]}">${initials}</div>
+          <b>${m.name}</b><div class="role">${m.role}</div></div>`;
+}).join("");
+
+// Criteria checklist, remembered in this browser
+const checks = document.querySelectorAll("#critmap input");
+const checkBar = document.querySelector(".progress div"), checkLabel = document.querySelector(".progress-label");
+const updateChecks = () => {
+  const n = [...checks].filter(c => c.checked).length;
+  checkBar.style.width = (100 * n / checks.length) + "%";
+  checkLabel.textContent = `${n} of ${checks.length} strands done`;
+};
+let saved = [];
+try { saved = JSON.parse(localStorage.getItem("critChecks") || "[]"); } catch (e) {}
+checks.forEach((box, i) => {
+  box.checked = !!saved[i];
+  box.parentElement.classList.toggle("done", box.checked);
+  box.addEventListener("change", () => {
+    box.parentElement.classList.toggle("done", box.checked);
+    try { localStorage.setItem("critChecks", JSON.stringify([...checks].map(c => c.checked))); } catch (e) {}
+    updateChecks();
+  });
+});
+updateChecks();
+
+// =====================================================================
+//  Fieldwork: site photos, gallery, interviews
+// =====================================================================
+
+// Swap the place placeholders for real photos once they exist
+document.querySelectorAll(".photo[data-src]").forEach(box => {
+  const img = new Image();
+  img.onload = () => { box.textContent = ""; box.classList.add("has-img"); box.appendChild(img); };
+  img.alt = box.dataset.alt;
+  img.src = box.dataset.src;
+});
+
+const gallery = document.getElementById("galleryGrid");
+if (gallery) {
+  const lightbox = document.createElement("div");
+  lightbox.className = "lightbox";
+  lightbox.innerHTML = `<div><img alt=""><p></p></div>`;
+  document.body.appendChild(lightbox);
+  let loaded = 0, pending = photos.length;
+  const done = () => {
+    if (--pending === 0 && loaded === 0)
+      gallery.innerHTML = `<div class="gallery-empty">📷 No photos yet. Put your photos in the <b>images</b> folder and list them in <code>photos</code> in this file.</div>`;
+  };
+  photos.forEach(p => {
+    // Add in list order straight away; drop the figure if its file is missing
+    const fig = document.createElement("figure");
+    const img = new Image();
+    img.alt = p.caption;
+    img.loading = "lazy";
+    fig.append(img, Object.assign(document.createElement("figcaption"), { textContent: p.caption }));
+    gallery.appendChild(fig);
+    img.onload = () => { loaded++; done(); };
+    img.onerror = () => { fig.remove(); done(); };
+    img.onclick = () => {
+      lightbox.querySelector("img").src = img.src;
+      lightbox.querySelector("p").textContent = p.caption;
+      lightbox.classList.add("open");
+    };
+    img.src = "images/" + p.file;
+  });
+  lightbox.onclick = () => lightbox.classList.remove("open");
+  document.addEventListener("keydown", e => { if (e.key === "Escape") lightbox.classList.remove("open"); });
+}
+
+const videosEl = document.getElementById("videos");
+if (videosEl) {
+  let vidLoaded = 0, vidPending = interviews.length;
+  const vidDone = () => {
+    if (--vidPending === 0 && vidLoaded === 0)
+      videosEl.innerHTML = `<div class="gallery-empty">🎥 No interview videos yet. Put your videos in the <b>videos</b> folder and list them in <code>interviews</code> in this file.</div>`;
+  };
+  interviews.forEach(v => {
+    const card = document.createElement("article");
+    card.className = "video-card";
+    const video = document.createElement("video");
+    video.controls = true;
+    video.preload = "metadata";
+    video.playsInline = true;
+    const body = document.createElement("div");
+    body.className = "body";
+    body.innerHTML = `<h3></h3><div class="who"></div><blockquote class="quote"></blockquote><p class="takeaway"></p>`;
+    body.querySelector("h3").textContent = v.title;
+    body.querySelector(".who").textContent = v.who;
+    if (v.quote) body.querySelector(".quote").textContent = `“${v.quote}”`;
+    else body.querySelector(".quote").remove();
+    body.querySelector(".takeaway").textContent = v.takeaway;
+    // Add in list order straight away (hidden), show once the video loads, drop it if the file is missing
+    card.append(video, body);
+    card.hidden = true;
+    videosEl.appendChild(card);
+    video.addEventListener("loadedmetadata", () => { vidLoaded++; card.hidden = false; vidDone(); }, { once: true });
+    video.addEventListener("error", () => { card.remove(); vidDone(); }, { once: true });
+    video.src = "videos/" + v.file;
+  });
+}
+
+// =====================================================================
+//  Results: data processing (Criterion C)
+// =====================================================================
+
+const rawEl = document.getElementById("rawTable");
+if (rawEl) {
+  const { types, sites } = fieldData;
+  const mean = a => a.reduce((s, x) => s + x, 0) / a.length;
+  const sd = a => { const m = mean(a); return a.length < 2 ? 0 : Math.sqrt(a.reduce((s, x) => s + (x - m) ** 2, 0) / (a.length - 1)); };
+  const siteColors = ["var(--sea)", "var(--sand)", "var(--leaf)", "var(--warn)"];
+
+  let raw = `<table><caption>Table 1: Raw data — number of waste items counted per quadrat</caption><thead><tr><th>Site</th><th>Quadrat</th>`
+    + types.map(t => `<th class="num">${t}</th>`).join("") + `<th class="num">Total</th></tr></thead><tbody>`;
+  sites.forEach(s => s.quadrats.forEach((q, i) => {
+    raw += `<tr><td>${i === 0 ? `<b>${s.name}</b>` : ""}</td><td>${i + 1}</td>`
+      + q.map(n => `<td class="num">${n}</td>`).join("") + `<td class="num"><b>${q.reduce((a, b) => a + b, 0)}</b></td></tr>`;
+  }));
+  rawEl.innerHTML = raw + `</tbody></table>`;
+
+  // Processed data: mean ± SD and % of all items at that site
+  const stats = sites.map(s => {
+    const byType = types.map((_, t) => s.quadrats.map(q => q[t]));
+    const siteTotal = s.quadrats.flat().reduce((a, b) => a + b, 0);
+    return { name: s.name, rows: byType.map(v => ({ mean: mean(v), sd: sd(v), pct: 100 * v.reduce((a, b) => a + b, 0) / siteTotal })) };
+  });
+  let proc = `<table><caption>Table 2: Processed data — mean items per quadrat (± standard deviation) and percentage of all items at each site</caption><thead><tr><th>Waste type</th>`
+    + stats.map(s => `<th class="num">${s.name}<br>mean ± SD</th><th class="num">% of site</th>`).join("") + `</tr></thead><tbody>`;
+  types.forEach((t, i) => {
+    proc += `<tr><td>${t}</td>` + stats.map(s => `<td class="num">${s.rows[i].mean.toFixed(1)} ± ${s.rows[i].sd.toFixed(1)}</td><td class="num">${s.rows[i].pct.toFixed(1)}%</td>`).join("") + `</tr>`;
+  });
+  document.getElementById("procTable").innerHTML = proc + `</tbody></table>`;
+
+  // Grouped bar chart of means
+  document.getElementById("legend").innerHTML = stats.map((s, i) => `<span style="--key:${siteColors[i]}">${s.name}</span>`).join("");
+  const max = Math.max(...stats.flatMap(s => s.rows.map(r => r.mean)));
+  const chart = document.getElementById("chart");
+  chart.innerHTML = types.map((t, i) => `<div class="group"><span>${t}</span><div class="bars">`
+    + stats.map((s, j) => `<div class="bar-line"><div class="bar-track"><div class="bar" style="background:${siteColors[j]}" data-w="${(s.rows[i].mean / max) * 100}"></div></div><b>${s.rows[i].mean.toFixed(1)}</b></div>`).join("")
+    + `</div></div>`).join("");
+  // C.ii / C.iii are written from the numbers, so they stay correct when the data changes
+  const share = (s, re) => s.rows.reduce((t, r, i) => t + (re.test(types[i]) ? r.pct : 0), 0);
+  const perQuadrat = (site, re) => site.quadrats.map(q => q.reduce((t, n, i) => t + (re.test(types[i]) ? n : 0), 0));
+  const PLASTIC = /plastic/i, LOCAL = /food|organic|wood/i;
+  const [city, beach] = stats;
+  const top = s => { let best = 0; s.rows.forEach((r, i) => { if (r.mean > s.rows[best].mean) best = i; }); return types[best].toLowerCase(); };
+  const pc = share(city, PLASTIC), pb = share(beach, PLASTIC), lc = share(city, LOCAL), lb = share(beach, LOCAL);
+  document.getElementById("trendText").innerHTML =
+    `The most common type of waste in ${city.name} was <b>${top(city)}</b>, while at ${beach.name} it was <b>${top(beach)}</b>. ` +
+    `Plastic bottles and bags made up <b>${pb.toFixed(0)}%</b> of all items at ${beach.name}, compared with <b>${pc.toFixed(0)}%</b> in ${city.name}. ` +
+    `Food, organic and wood waste made up <b>${lc.toFixed(0)}%</b> in ${city.name} but only <b>${lb.toFixed(0)}%</b> at ${beach.name} (Table 2).`;
+  const plasticUp = pb > pc, localUp = lc > lb;
+  const verdict = plasticUp && localUp ? "supported" : plasticUp || localUp ? "partly supported" : "not supported";
+  const qc = perQuadrat(sites[0], PLASTIC), qb = perQuadrat(sites[1], PLASTIC);
+  const overlap = mean(qb) - sd(qb) <= mean(qc) + sd(qc);
+  document.getElementById("hypothesisText").innerHTML =
+    `Our hypothesis was <b>${verdict}</b>. ` +
+    (plasticUp ? `Ras El Bar had a higher share of plastic (${pb.toFixed(0)}% vs ${pc.toFixed(0)}%), as predicted. ` : `Ras El Bar did not have a higher share of plastic (${pb.toFixed(0)}% vs ${pc.toFixed(0)}%). `) +
+    (localUp ? `Damietta had more organic and wood waste (${lc.toFixed(0)}% vs ${lb.toFixed(0)}%), as predicted. ` : `Damietta did not have more organic and wood waste (${lc.toFixed(0)}% vs ${lb.toFixed(0)}%). `) +
+    (overlap
+      ? `However, the plastic counts per quadrat overlap between the sites once the standard deviation is included (${mean(qc).toFixed(1)} ± ${sd(qc).toFixed(1)} vs ${mean(qb).toFixed(1)} ± ${sd(qb).toFixed(1)}), so the difference may not be reliable with only ${qc.length} quadrats per site.`
+      : `The plastic counts per quadrat do not overlap even with the standard deviation included (${mean(qc).toFixed(1)} ± ${sd(qc).toFixed(1)} vs ${mean(qb).toFixed(1)} ± ${sd(qb).toFixed(1)}), which makes the difference more convincing, although ${qc.length} quadrats per site is still a small sample.`);
+
+  new IntersectionObserver((entries, obs) => {
+    if (entries[0].isIntersecting) {
+      chart.querySelectorAll(".bar").forEach(b => b.style.width = b.dataset.w + "%");
+      obs.disconnect();
+    }
+  }).observe(chart);
+}
+
+// =====================================================================
+//  Quiz
+// =====================================================================
+
+const itemEl = document.getElementById("item");
+if (itemEl) {
+  const items = [
+    { name: "🥤 Plastic water bottle", bin: "plastic", why: "PET plastic can be recycled into new bottles or fibres." },
+    { name: "🐟 Fish bones", bin: "organic", why: "Organic waste can be composted or turned into biogas." },
+    { name: "📰 Old newspaper", bin: "paper", why: "Paper fibres can be recycled several times." },
+    { name: "🔋 Used battery", bin: "hazardous", why: "Batteries contain metals like lead and cadmium that poison soil and water." },
+    { name: "🍉 Watermelon rind", bin: "organic", why: "Food scraps break down naturally and make good compost." },
+    { name: "🛍️ Plastic bag", bin: "plastic", why: "Bags are a major beach pollutant and can choke turtles and fish." },
+    { name: "📦 Cardboard box", bin: "paper", why: "Flatten it first so it takes less space." },
+    { name: "🎨 Paint can from a furniture workshop", bin: "hazardous", why: "Paints, varnish and solvents are toxic and must not go down drains." },
+  ];
+  let idx = 0, right = 0, total = 0, answered = false;
+  const fb = document.getElementById("feedback"), scoreEl = document.getElementById("score");
+  const show = () => { itemEl.textContent = items[idx].name; fb.textContent = ""; answered = false; };
+  document.querySelectorAll(".bins button").forEach(btn => btn.addEventListener("click", () => {
+    if (answered) return;
+    answered = true; total++;
+    const it = items[idx];
+    if (btn.dataset.bin === it.bin) { right++; fb.innerHTML = `✅ Correct! ${it.why}`; }
+    else { fb.innerHTML = `❌ It goes in <b>${it.bin}</b>. ${it.why}`; }
+    scoreEl.textContent = `Score: ${right} / ${total}`;
+    idx = (idx + 1) % items.length;
+    setTimeout(show, 2200);
+  }));
+  show();
+}
+</script>
+</body>
+</html>
