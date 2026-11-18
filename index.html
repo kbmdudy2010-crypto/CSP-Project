@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07161a">
+<meta property="og:title" content="From Nile to Sea">
+<meta property="og:description" content="What we drop, the sea keeps. A waste campaign by Hayah International Academy students.">
+<meta property="og:image" content="https://kbmdudy2010-crypto.github.io/CSP-Project/carousel/slide-10.jpg">
 <title>From Nile to Sea</title>
 <meta name="description" content="What we drop, the sea keeps. A waste campaign by nine Hayah International Academy students after a field trip to Damietta and Ras El Bar, Egypt.">
 <meta name="color-scheme" content="dark">
@@ -36,7 +40,7 @@ h3 { font-size: 1.25rem; }
 p { margin: 0 0 1em; }
 a { color: var(--sea); }
 img, video { max-width: 100%; display: block; }
-.wrap { max-width: 1140px; margin: 0 auto; padding: 0 16px; }
+.wrap { max-width: 1140px; margin: 0 auto; padding: 0 max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left)); }
 .eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: .78rem; font-weight: 700; color: var(--sea); margin-bottom: 10px; }
 .lead { color: var(--muted); font-size: 1.1rem; max-width: 680px; }
 .cite { font-size: .72em; vertical-align: super; text-decoration: none; font-weight: 700; color: var(--sea); }
@@ -54,7 +58,7 @@ img, video { max-width: 100%; display: block; }
 .nav-links a { color: rgba(255,255,255,.75); text-decoration: none; font-size: .86rem; font-weight: 500; padding: 7px 10px; border-radius: 99px; white-space: nowrap; transition: background .2s, color .2s; }
 .nav-links a:hover, .nav-links a.on { background: rgba(255,255,255,.12); color: #fff; }
 .menu-btn { display: none; margin-left: auto; font: inherit; font-weight: 600; color: #fff; background: rgba(255,255,255,.1); border: 1px solid var(--line); border-radius: 99px; padding: 7px 14px; cursor: pointer; }
-@media (max-width: 1020px) {
+@media (max-width: 1180px) {
   .menu-btn { display: block; }
   .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: rgba(7,22,26,.97); padding: 10px 16px 18px; border-bottom: 1px solid var(--line); }
   .nav-links.open { display: flex; }
@@ -81,21 +85,23 @@ img, video { max-width: 100%; display: block; }
 }
 .dock a span kbd { font: inherit; color: var(--sand); margin-left: 6px; }
 .dock a:hover span { opacity: 1; transform: none; }
-@media (max-width: 760px) {
-  .dock { top: auto; bottom: 10px; right: 50%; transform: translateX(50%); flex-direction: row; max-width: calc(100vw - 20px); overflow-x: auto; }
-  .dock a { flex: 0 0 38px; height: 38px; }
+/* Phones and iPads: dock sits at the bottom, clear of the iPhone home bar */
+@media (max-width: 1279px) {
+  .dock { top: auto; bottom: calc(10px + env(safe-area-inset-bottom)); right: 50%; transform: translateX(50%); flex-direction: row; max-width: calc(100vw - 20px); overflow-x: auto; scrollbar-width: none; }
+  .dock a { flex: 0 0 40px; height: 40px; }
   .dock a span { display: none; }
   .dock a:hover, .dock a.on { transform: scale(1.1); }
 }
+@media (max-width: 420px) { .dock a { flex-basis: 34px; height: 36px; font-size: 1rem; } }
 
 /* ---------- 3D landing ---------- */
 .hero {
-  position: relative; min-height: 100vh; min-height: 100svh; display: grid; align-items: end; overflow: hidden;
+  position: relative; min-height: 100vh; min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr); align-items: end; overflow: hidden;
   background: linear-gradient(180deg, #0b1f33 0%, #24405e 38%, #b86c52 62%, #f1a85f 70%, #0b2a33 71%, #07161a 100%);
 }
 #ocean { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .hero::after { content: ""; position: absolute; inset: auto 0 0 0; height: 45%; background: linear-gradient(180deg, transparent, var(--bg)); pointer-events: none; }
-.hero-inner { position: relative; z-index: 2; padding: 120px 0 64px; will-change: transform, opacity; }
+.hero-inner { position: relative; z-index: 2; width: 100%; min-width: 0; padding-top: 120px; padding-bottom: 64px; will-change: transform, opacity; }
 .hero .eyebrow { color: #9fe3e8; }
 .hero h1 {
   font-size: clamp(3rem, 10vw, 7.2rem); font-weight: 800; margin: 0 0 .15em; letter-spacing: -.01em;
@@ -113,8 +119,19 @@ img, video { max-width: 100%; display: block; }
 
 /* Shortcut tiles on the landing */
 .tiles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; perspective: 900px; }
-@media (max-width: 900px) { .tiles { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 520px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+/* Phones and iPads: one swipeable row, so the landing fits on one screen */
+@media (max-width: 1099px) {
+  .tiles {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px;
+    margin: 0 -16px; padding: 4px 16px 10px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 40px), transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 40px), transparent);
+  }
+  .tiles::-webkit-scrollbar, .dock::-webkit-scrollbar { display: none; }
+  .tile { flex: 0 0 128px; scroll-snap-align: start; }
+}
+.swipe-hint { display: none; font-size: .78rem; color: rgba(255,255,255,.6); margin: 0 0 8px; }
+@media (max-width: 1099px) { .swipe-hint { display: block; } }
 .tile {
   position: relative; display: block; padding: 14px 14px 12px; border-radius: 16px; text-decoration: none; color: #fff;
   background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(10px);
@@ -171,7 +188,9 @@ section + section { border-top: 1px solid var(--line); }
 .facts { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); perspective: 1400px; }
 .flip { height: 270px; cursor: pointer; background: none; border: 0; padding: 0; text-align: left; color: inherit; font: inherit; }
 .flip-in { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
-.flip:hover .flip-in, .flip.flipped .flip-in, .flip:focus-visible .flip-in { transform: rotateY(180deg); }
+.flip.flipped .flip-in, .flip:focus-visible .flip-in { transform: rotateY(180deg); }
+/* Hover-flip only with a real mouse; on phones/iPads a tap flips and a second tap flips back */
+@media (hover: hover) and (pointer: fine) { .flip:hover .flip-in { transform: rotateY(180deg); } }
 .face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius); padding: 24px; border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: flex-end; }
 .face.front { background: linear-gradient(160deg, rgba(76,195,204,.16), rgba(255,255,255,.03)); }
 .face.back { background: linear-gradient(160deg, rgba(240,196,106,.16), rgba(255,255,255,.04)); transform: rotateY(180deg); justify-content: center; }
@@ -264,6 +283,22 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .kbd-hint { font-size: .82rem; color: var(--muted); }
 .kbd-hint kbd { font: 700 .75rem Inter, sans-serif; color: var(--sand); border: 1px solid rgba(240,196,106,.45); border-radius: 5px; padding: 0 5px; }
 
+/* Touchscreens: no keyboard hints, roomier footer above the bottom dock */
+@media (hover: none) {
+  .tile kbd, .kbd-hint, .face .hint { display: none; }
+}
+@media (max-width: 1279px) { footer { padding-bottom: calc(120px + env(safe-area-inset-bottom)); } }
+@media (max-width: 600px) {
+  section { padding: 80px 0; }
+  .hero-inner { padding-top: 100px; padding-bottom: 56px; }
+  .btns { margin: 20px 0 22px; }
+  .btn { padding: 12px 18px; }
+  .flip { height: 250px; }
+  .caption-box pre { max-height: 340px; }
+}
+/* Safari needs the prefixed frosted-glass property */
+.nav.solid, .dock, .tile, .btn.ghost { -webkit-backdrop-filter: blur(12px); }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
@@ -295,6 +330,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <a class="btn" href="#reel">▶ Watch our reel</a>
       <a class="btn ghost" href="#message">What you can do</a>
     </div>
+    <p class="swipe-hint">Jump to a part · swipe for more →</p>
     <div class="tiles" id="tiles"></div>
   </div>
   <a class="scroll-cue" href="#message">Scroll ↓</a>
